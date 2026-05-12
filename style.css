@@ -1,0 +1,40 @@
+body {
+    font-family: Consolas, Menlo, Monaco, 'Courier New', monospace;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: black;
+    color: red;
+    text-align: left;
+    font-size: 16px;
+}
+
+h1,
+h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+h1 {
+    text-decoration: underline;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+/* main {} */
+
+.card {
+    margin-bottom: 20px;
+}
+
+a {
+    color: red;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #00FF00;
+    text-decoration: underline;
+}
