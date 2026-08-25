@@ -1,0 +1,45 @@
+name: Generate CV PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - 'style.css'
+      - 'generate_pdf.py'
+      - '.github/workflows/generate-pdf.yml'
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install playwright
+
+    - name: Install Playwright Chromium & System Dependencies
+      run: |
+        playwright install chromium
+        playwright install-deps chromium
+
+    - name: Generate CV PDF
+      run: python generate_pdf.py
+
+    - name: Commit and Push Changes
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "chore: auto-generate CV.pdf from website changes [skip ci]"
+        file_pattern: 'CV.pdf'

@@ -1,0 +1,16 @@
+# Python Virtual Environment
+venv/
+temp_venv/
+__pycache__/
+*.pyc
+
+# IDEs and OS Metadata
+.DS_Store
+.idea/
+.vscode/
+
+# Node environment (optional)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

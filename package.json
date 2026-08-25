@@ -1,0 +1,13 @@
+{
+  "name": "plasmajello-portfolio",
+  "version": "1.0.0",
+  "description": "Sina Fard's Dev Portfolio and Automated CV Website",
+  "main": "index.html",
+  "scripts": {
+    "serve": "python3 -m http.server 8000",
+    "pdf": "python3 generate_pdf.py"
+  },
+  "keywords": [],
+  "author": "Sina Fard",
+  "license": "MIT"
+}
