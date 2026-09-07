@@ -21,14 +21,58 @@
 <body>
   <!-- Header / Navigation Controls -->
   <div class="controls no-print" id="ui-controls">
-    <button id="print-cv" class="btn btn-primary" title="Print or save CV to PDF">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
-        <path
-          d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
-      </svg>
-      Print / Save PDF
-    </button>
+    <div class="cv-dropdown-wrapper" id="cv-dropdown-wrapper">
+      <button id="cv-dropdown-trigger" class="btn btn-primary" aria-haspopup="true" aria-expanded="false" title="Print or save CV to PDF">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+          <path
+            d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z" />
+        </svg>
+        Print / Save PDF
+        <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </button>
+
+      <div class="cv-dropdown-menu" id="cv-dropdown-menu" role="menu">
+        <div class="dropdown-section-title">Print / Save as PDF</div>
+        
+        <button class="dropdown-item" id="print-full-cv" role="menuitem">
+          <div class="dropdown-item-content">
+            <span class="dropdown-item-title">Full CV</span>
+            <span class="dropdown-item-desc">Complete 2-page detailed history</span>
+          </div>
+          <span class="dropdown-badge">2 Pages</span>
+        </button>
+
+        <button class="dropdown-item" id="print-short-cv" role="menuitem">
+          <div class="dropdown-item-content">
+            <span class="dropdown-item-title">Condensed CV</span>
+            <span class="dropdown-item-desc">Concise 1-page snapshot of key roles</span>
+          </div>
+          <span class="dropdown-badge">1 Page</span>
+        </button>
+
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-section-title">Direct Download</div>
+
+        <a href="CV.pdf" download="Sina_Fard_CV.pdf" class="dropdown-item" role="menuitem">
+          <div class="dropdown-item-content">
+            <span class="dropdown-item-title">Download Full CV</span>
+            <span class="dropdown-item-desc">PDF format &bull; 2 Pages</span>
+          </div>
+          <span class="dropdown-badge">PDF</span>
+        </a>
+
+        <a href="CV-OnePage.pdf" download="Sina_Fard_CV_OnePage.pdf" class="dropdown-item" role="menuitem">
+          <div class="dropdown-item-content">
+            <span class="dropdown-item-title">Download 1-Page CV</span>
+            <span class="dropdown-item-desc">PDF format &bull; 1 Page</span>
+          </div>
+          <span class="dropdown-badge">PDF</span>
+        </a>
+      </div>
+    </div>
   </div>
 
   <div class="page-container">
@@ -177,7 +221,7 @@
           </ul>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item hide-condensed">
           <div class="timeline-header">
             <h4 class="role">Events &amp; Festival Assistant</h4>
             <span class="timeline-date">May 2025 &ndash; Dec 2025</span>
@@ -203,7 +247,7 @@
           </ul>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item hide-condensed">
           <div class="timeline-header">
             <h4 class="role">Back of House Griller</h4>
             <span class="timeline-date">Jun 2023 &ndash; Sep 2024</span>
@@ -215,7 +259,7 @@
           </ul>
         </div>
 
-        <div class="timeline-item">
+        <div class="timeline-item hide-condensed">
           <div class="timeline-header">
             <h4 class="role">General Shop Floor Assistant</h4>
             <span class="timeline-date">Jul 2021 &ndash; Nov 2021</span>
@@ -265,9 +309,69 @@
   </footer>
 
   <script>
-    document.getElementById('print-cv').addEventListener('click', function () {
-      window.print();
+    const dropdownWrapper = document.getElementById('cv-dropdown-wrapper');
+    const dropdownTrigger = document.getElementById('cv-dropdown-trigger');
+    const printFullBtn = document.getElementById('print-full-cv');
+    const printShortBtn = document.getElementById('print-short-cv');
+
+    function closeDropdown() {
+      if (dropdownWrapper) {
+        dropdownWrapper.classList.remove('active');
+        dropdownTrigger.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    function toggleDropdown(e) {
+      e.stopPropagation();
+      const isOpen = dropdownWrapper.classList.toggle('active');
+      dropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    }
+
+    if (dropdownTrigger) {
+      dropdownTrigger.addEventListener('click', toggleDropdown);
+    }
+
+    // Close on click outside
+    document.addEventListener('click', function (e) {
+      if (dropdownWrapper && !dropdownWrapper.contains(e.target)) {
+        closeDropdown();
+      }
     });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeDropdown();
+      }
+    });
+
+    // Print Full CV (2 pages)
+    if (printFullBtn) {
+      printFullBtn.addEventListener('click', function () {
+        closeDropdown();
+        document.body.classList.remove('cv-condensed');
+        window.print();
+      });
+    }
+
+    // Print Condensed CV (1 page)
+    if (printShortBtn) {
+      printShortBtn.addEventListener('click', function () {
+        closeDropdown();
+        document.body.classList.add('cv-condensed');
+        
+        // Short delay to ensure browser recomputes layout before opening print dialog
+        setTimeout(function () {
+          window.print();
+          
+          // Clean up condensed class after print dialog is closed
+          window.addEventListener('afterprint', function cleanup() {
+            document.body.classList.remove('cv-condensed');
+            window.removeEventListener('afterprint', cleanup);
+          }, { once: true });
+        }, 50);
+      });
+    }
   </script>
 </body>
 

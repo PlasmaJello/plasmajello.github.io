@@ -41,5 +41,5 @@ jobs:
     - name: Commit and Push Changes
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
-        commit_message: "chore: auto-generate CV.pdf from website changes [skip ci]"
-        file_pattern: 'CV.pdf'
+        commit_message: "chore: auto-generate CV PDFs from website changes [skip ci]"
+        file_pattern: 'CV.pdf CV-OnePage.pdf'

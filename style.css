@@ -68,12 +68,18 @@ body {
   display: flex;
   gap: 12px;
   z-index: 1000;
-  background: rgba(11, 15, 25, 0.8);
-  backdrop-filter: blur(8px);
-  padding: 8px;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px;
   border-radius: 30px;
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow);
+}
+
+.cv-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 .btn {
@@ -89,6 +95,7 @@ body {
   transition: var(--transition);
   text-decoration: none;
   border: none;
+  user-select: none;
 }
 
 .btn svg {
@@ -100,10 +107,129 @@ body {
   color: #06090e;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus-visible {
   background-color: var(--primary-hover);
   box-shadow: 0 0 15px rgba(52, 211, 153, 0.4);
   transform: translateY(-1px);
+}
+
+.chevron-icon {
+  transition: transform 0.25s ease;
+}
+
+.cv-dropdown-wrapper.active .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Glassmorphism Dropdown Menu */
+.cv-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 320px;
+  background: rgba(11, 15, 25, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.12);
+  padding: 12px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 1001;
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cv-dropdown-wrapper.active .cv-dropdown-menu {
+  display: flex;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  padding: 6px 10px 4px 10px;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-main);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus-visible {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.3);
+  color: var(--text-bright);
+  transform: translateX(2px);
+}
+
+.dropdown-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dropdown-item-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.dropdown-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 4px 6px;
 }
 
 .btn-secondary {
@@ -550,19 +676,45 @@ a.contact-link:hover svg {
   .timeline-date {
     display: inline-block;
   }
+
+  .cv-dropdown-menu {
+    right: 50%;
+    transform: translateX(50%);
+    min-width: 290px;
+    max-width: 90vw;
+  }
+
+  @keyframes dropdownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(50%) translateY(-6px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(50%) translateY(0) scale(1);
+    }
+  }
 }
 
 /* ==========================================================================
    PRINT MEDIA STYLES
    ========================================================================== */
+@page {
+  size: A4;
+  margin: 0; /* Eliminates browser default headers & footers (page numbers, date, URL) */
+}
+
 @media print {
   /* Reset colors to clean standard black and white print layout */
   body {
     background-color: #ffffff !important;
     color: #111111 !important;
-    font-size: 11.5pt !important;
+    font-size: 11pt !important;
     line-height: 1.4 !important;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+    margin: 0 !important;
+    padding: 12mm 15mm !important;
+    box-sizing: border-box !important;
   }
 
   .page-container {
@@ -575,7 +727,9 @@ a.contact-link:hover svg {
   /* Hide interactive web components */
   .no-print, 
   #ui-controls, 
-  .cv-download {
+  .cv-download,
+  .controls,
+  .cv-dropdown-wrapper {
     display: none !important;
   }
 
@@ -584,7 +738,7 @@ a.contact-link:hover svg {
     position: static !important;
     border-bottom: 2px solid #111111 !important;
     padding-bottom: 12px !important;
-    margin-bottom: 20px !important;
+    margin-bottom: 18px !important;
     display: block !important;
   }
 
@@ -641,15 +795,20 @@ a.contact-link:hover svg {
 
   /* Main Sections spacing for print */
   .main-content {
-    gap: 18pt !important;
+    gap: 16pt !important;
   }
 
   .section {
     page-break-inside: avoid !important;
   }
 
+  /* For full 2-page print, give top spacing to the section breaking onto page 2 */
+  body:not(.cv-condensed) #experience {
+    margin-top: 14mm !important;
+  }
+
   .section-title {
-    font-size: 13pt !important;
+    font-size: 12.5pt !important;
     font-weight: 700 !important;
     color: #000000 !important;
     border-bottom: 1px solid #222222 !important;
@@ -664,7 +823,7 @@ a.contact-link:hover svg {
   }
 
   .profile-text {
-    font-size: 10.5pt !important;
+    font-size: 10pt !important;
     color: #222222 !important;
   }
 
@@ -724,14 +883,14 @@ a.contact-link:hover svg {
   }
 
   .project-desc {
-    font-size: 10pt !important;
+    font-size: 9.5pt !important;
     color: #333333 !important;
   }
 
   /* Experience / Timeline Print */
   .timeline-item {
     padding-left: 0 !important;
-    margin-bottom: 12pt !important;
+    margin-bottom: 11pt !important;
     page-break-inside: avoid !important;
   }
 
@@ -759,14 +918,14 @@ a.contact-link:hover svg {
   }
 
   .company-info {
-    font-size: 10pt !important;
+    font-size: 9.5pt !important;
     color: #333333 !important;
     font-weight: 600 !important;
     margin-bottom: 4pt !important;
   }
 
   .timeline-bullets li {
-    font-size: 10pt !important;
+    font-size: 9.5pt !important;
     color: #333333 !important;
     margin-bottom: 2pt !important;
     padding-left: 12px !important;
@@ -798,14 +957,14 @@ a.contact-link:hover svg {
   }
 
   .institution {
-    font-size: 10pt !important;
+    font-size: 9.5pt !important;
     color: #333333 !important;
     font-weight: 600 !important;
     margin-bottom: 3pt !important;
   }
 
   .education-details {
-    font-size: 9.5pt !important;
+    font-size: 9pt !important;
     color: #444444 !important;
   }
 
@@ -813,10 +972,162 @@ a.contact-link:hover svg {
   .print-footer {
     display: block !important;
     border-top: 1px solid #dddddd !important;
-    margin-top: 25pt !important;
+    margin-top: 20pt !important;
     padding-top: 8pt !important;
     text-align: center !important;
     font-size: 9pt !important;
     color: #666666 !important;
+  }
+
+  /* ==========================================================================
+     CONDENSED (1-PAGE) CV PRINT STYLES
+     ========================================================================== */
+  body.cv-condensed {
+    padding: 9mm 13mm !important;
+    font-size: 10pt !important;
+    line-height: 1.32 !important;
+  }
+
+  body.cv-condensed .sidebar-header {
+    padding-bottom: 6px !important;
+    margin-bottom: 10px !important;
+    border-bottom-width: 1.5px !important;
+  }
+
+  body.cv-condensed .name {
+    font-size: 20pt !important;
+    margin-bottom: 1pt !important;
+  }
+
+  body.cv-condensed .title {
+    font-size: 10.5pt !important;
+    margin-bottom: 3pt !important;
+  }
+
+  body.cv-condensed .tagline {
+    font-size: 8.8pt !important;
+    margin-bottom: 5pt !important;
+  }
+
+  body.cv-condensed .contact-info {
+    gap: 12px !important;
+    margin-top: 3px !important;
+  }
+
+  body.cv-condensed .contact-link {
+    font-size: 8.5pt !important;
+  }
+
+  body.cv-condensed .main-content {
+    gap: 9pt !important;
+  }
+
+  body.cv-condensed .section {
+    page-break-inside: avoid !important;
+    margin-bottom: 0 !important;
+  }
+
+  body.cv-condensed .section-title {
+    font-size: 10.5pt !important;
+    margin-bottom: 4pt !important;
+    padding-bottom: 2pt !important;
+    letter-spacing: 0.8px !important;
+  }
+
+  body.cv-condensed .profile-text {
+    font-size: 8.8pt !important;
+    line-height: 1.3 !important;
+  }
+
+  body.cv-condensed .skills-grid {
+    gap: 10px !important;
+  }
+
+  body.cv-condensed .skills-category h4 {
+    font-size: 8.5pt !important;
+    margin-bottom: 2pt !important;
+  }
+
+  body.cv-condensed .tags {
+    gap: 3px !important;
+  }
+
+  body.cv-condensed .tag {
+    font-size: 8pt !important;
+    padding: 1.5px 5px !important;
+  }
+
+  body.cv-condensed .project-item {
+    margin-bottom: 5pt !important;
+  }
+
+  body.cv-condensed .project-header {
+    margin-bottom: 1pt !important;
+  }
+
+  body.cv-condensed .project-name a {
+    font-size: 10pt !important;
+  }
+
+  body.cv-condensed .project-tech {
+    font-size: 8pt !important;
+  }
+
+  body.cv-condensed .project-desc {
+    font-size: 8.5pt !important;
+    line-height: 1.28 !important;
+  }
+
+  body.cv-condensed .timeline-item.hide-condensed {
+    display: none !important;
+  }
+
+  body.cv-condensed .timeline-item {
+    margin-bottom: 5pt !important;
+  }
+
+  body.cv-condensed .role {
+    font-size: 10pt !important;
+  }
+
+  body.cv-condensed .timeline-date {
+    font-size: 8.5pt !important;
+  }
+
+  body.cv-condensed .company-info {
+    font-size: 8.8pt !important;
+    margin-bottom: 2pt !important;
+  }
+
+  body.cv-condensed .timeline-bullets li {
+    font-size: 8.5pt !important;
+    line-height: 1.28 !important;
+    margin-bottom: 1.5pt !important;
+  }
+
+  body.cv-condensed .education-item {
+    margin-bottom: 4pt !important;
+  }
+
+  body.cv-condensed .degree {
+    font-size: 10pt !important;
+  }
+
+  body.cv-condensed .education-date {
+    font-size: 8.5pt !important;
+  }
+
+  body.cv-condensed .institution {
+    font-size: 8.8pt !important;
+    margin-bottom: 1.5pt !important;
+  }
+
+  body.cv-condensed .education-details {
+    font-size: 8.5pt !important;
+    line-height: 1.28 !important;
+  }
+
+  body.cv-condensed .print-footer {
+    display: none !important;
   }
 }
