@@ -21,13 +21,6 @@
 <body>
   <!-- Header / Navigation Controls -->
   <div class="controls no-print" id="ui-controls">
-    <button id="toggle-preview" class="btn btn-secondary" title="Preview print layout in-browser">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-      </svg>
-      Preview Print Layout
-    </button>
     <button id="print-cv" class="btn btn-primary" title="Print or save CV to PDF">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
         <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
@@ -81,19 +74,6 @@
           </svg>
           Watford, UK
         </div>
-      </div>
-
-      <div class="cv-download no-print">
-        <a href="CV.pdf" download class="btn btn-secondary btn-full">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
-            style="margin-right:8px;">
-            <path
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-            <path
-              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-          </svg>
-          Download PDF Version
-        </a>
       </div>
     </header>
 
@@ -284,18 +264,7 @@
     <p>References are available upon request.</p>
   </footer>
 
-  <!-- Print Preview script to toggle styles -->
   <script>
-    document.getElementById('toggle-preview').addEventListener('click', function () {
-      document.body.classList.toggle('print-preview');
-      const isPreview = document.body.classList.contains('print-preview');
-      this.innerHTML = isPreview ?
-        `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.354 1.146a.5.5 0 0 0-.708 0L8 5.793 3.354 1.146a.5.5 0 1 0-.708.708L7.293 6.5 2.646 11.146a.5.5 0 0 0 .708.708L8 7.207l4.646 4.647a.5.5 0 0 0 .708-.708L8.707 6.5l4.647-4.646a.5.5 0 0 0 0-.708z"/></svg> Close Print Preview` :
-        `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/><path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg> Preview Print Layout`;
-      this.classList.toggle('btn-secondary');
-      this.classList.toggle('btn-danger');
-    });
-
     document.getElementById('print-cv').addEventListener('click', function () {
       window.print();
     });
