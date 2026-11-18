@@ -23,10 +23,10 @@ as before.
 
 ## 2. Positioning & summary
 
-- [ ] Pick a headline aimed at tech roles, e.g. *"Backend Developer (Go / Python) with an agtech background"*
-- [ ] Rewrite **About Me** in 2–3 sentences: what you build, with what, and what role you want.
+- [x] Pick a headline aimed at tech roles, e.g. *"Backend Developer (Go / Python) with an agtech background"*
+- [x] Rewrite **About Me** in 2–3 sentences: what you build, with what, and what role you want.
       Cut generic phrases ("dedicated and adaptable", "proven ability to…")
-- [ ] Update the `<title>` and meta description to match the new headline
+- [x] Update the `<title>` and meta description to match the new headline
 
 ## 3. Experience
 
