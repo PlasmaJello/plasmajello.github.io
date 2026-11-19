@@ -30,9 +30,9 @@ as before.
 
 ## 3. Experience
 
-- [ ] Expand the Square Mile Farms "automated sensing" bullet into the specifics: what did you automate or measure, with what tools, and what changed?
-- [ ] Add numbers wherever they're true (crops managed, batches per week, yield change, etc.)
-- [ ] Trim non-tech roles to one bullet each about transferable skills
+- [x] Expand the Square Mile Farms "automated sensing" bullet into the specifics: what did you automate or measure, with what tools, and what changed?
+- [x] Add numbers wherever they're true (crops managed, batches per week, yield change, etc.)
+- [x] Trim non-tech roles to one bullet each about transferable skills
 
 ## 4. Skills & education
 
